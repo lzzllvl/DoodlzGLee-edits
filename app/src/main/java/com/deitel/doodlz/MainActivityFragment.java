@@ -168,6 +168,9 @@ public class MainActivityFragment extends Fragment {
             BackgroundFragment backgroundFragment = new BackgroundFragment();
             backgroundFragment.show(getFragmentManager(), "Background Color");
             return true;
+//         case R.id.undo:
+//            doodleView.addBackgroundImage();
+//            return true;
       }
 
       return super.onOptionsItemSelected(item);

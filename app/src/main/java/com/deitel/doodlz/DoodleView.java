@@ -27,12 +27,15 @@ public class DoodleView extends View {
 
    private Bitmap bitmap; // drawing area for displaying or saving
    private Canvas bitmapCanvas; // used to to draw on the bitmap
+
    private final Paint paintScreen; // used to draw bitmap onto screen
    private final Paint paintLine; // used to draw lines onto bitmap
 
    // Maps of current Paths being drawn and Points in those Paths
    private final Map<Integer, Path> pathMap = new HashMap<>();
    private final Map<Integer, Point> previousPointMap =  new HashMap<>();
+
+
 
 
    private int customBackgroundColor;
@@ -57,7 +60,9 @@ public class DoodleView extends View {
    public void onSizeChanged(int w, int h, int oldW, int oldH) {
       bitmap = Bitmap.createBitmap(getWidth(), getHeight(),
          Bitmap.Config.ARGB_8888);
+
       bitmapCanvas = new Canvas(bitmap);
+
       setBackgroundColor(0);
       bitmap.eraseColor(customBackgroundColor); // erase the Bitmap with white
    }
@@ -110,9 +115,12 @@ public class DoodleView extends View {
       // draw the background screen
       canvas.drawBitmap(bitmap, 0, 0, paintScreen);
 
+
       // for each path currently being drawn
-      for (Integer key : pathMap.keySet())
-         canvas.drawPath(pathMap.get(key), paintLine); // draw line
+      for (Integer key : pathMap.keySet()) {
+         canvas.drawPath(pathMap.get(key), paintLine);
+         // draw line
+      }
    }
 
    // handle touch event
@@ -204,8 +212,12 @@ public class DoodleView extends View {
    private void touchEnded(int lineID) {
       Path path = pathMap.get(lineID); // get the corresponding Path
       bitmapCanvas.drawPath(path, paintLine); // draw to bitmapCanvas
+      //bitmapBackup = bitmap;
       path.reset(); // reset the Path
    }
+
+
+
 
    // save the current image to the Gallery
    public void saveImage() {
